@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from application import Application
-
+from fixture.application import Application
 
 
 @pytest.fixture
@@ -11,12 +10,12 @@ def app(request):
     return fixture
 
 
-def test_login(app):
+def test_sig_in(app):
     app.login_page(username="bxuser", password="bxuser")
     app.logout()
 
 
-def test_login_empty_password(app):
+def test_sig_in_empty_password(app):
     app.login_page(username="bxuser", password="")
 
 

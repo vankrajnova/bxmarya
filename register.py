@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
-from reginfo import Reginfo
+
+from selenium.webdriver.firefox.webdriver import WebDriver
+
+from model.reginfo import Reginfo
+
 
 def is_alert_present(wd):
     try:
