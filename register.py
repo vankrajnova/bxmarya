@@ -16,16 +16,20 @@ class register(unittest.TestCase):
         self.wd.implicitly_wait(60)
 
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://bx.marya.ru/")
 
 
-    def open_register_page(self, wd):
+    def open_register_page(self):
+        wd = self.wd
         wd.find_element_by_css_selector("span.pseudolink.link-white").click()
         wd.find_element_by_link_text("Зарегистрироваться").click()
 
 
-    def create_registration_information(self, wd, reginfo):
+    def create_registration_information(self, reginfo):
+        wd = self.wd
+        self.open_register_page()
         wd.find_element_by_name("REGISTER[NAME]").click()
         wd.find_element_by_name("REGISTER[NAME]").clear()
         wd.find_element_by_name("REGISTER[NAME]").send_keys(reginfo.name)
@@ -53,18 +57,18 @@ class register(unittest.TestCase):
             "//div[@class='all-wrap']/div[3]/div/div[2]/form[1]/div[9]/div[2]/div/div[1]/div[1]").click()
         wd.find_element_by_xpath(
             "//div[@class='all-wrap']/div[3]/div/div[2]/form[1]/div[9]/div[2]/div/div[2]/ul/li").click()
+        self.open_next_step_page()
 
 
-    def open_next_step_page(self, wd):
+
+    def open_next_step_page(self):
+        wd = self.wd
         wd.find_element_by_name("next_step").click()
 
 
     def test_register(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.open_register_page(wd)
-        self.create_registration_information(wd, Reginfo(name="Тест", lastname="Тестовая", username="testlogin", password="123456", confirm_password="123456", email="test@mail.ru", phone="989 898-98-98"))
-        self.open_next_step_page(wd)
+        self.open_home_page()
+        self.create_registration_information(Reginfo(name="Тест", lastname="Тестовая", username="testlogin", password="123456", confirm_password="123456", email="test@mail.ru", phone="989 898-98-98"))
 
 
     def tearDown(self):
