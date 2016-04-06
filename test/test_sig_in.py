@@ -11,12 +11,12 @@ def app(request):
 
 
 def test_sig_in(app):
-    app.login_page(username="bxuser", password="bxuser")
-    app.logout()
+    app.session.login(username="bxuser", password="bxuser")
+    app.session.logout()
 
 
 def test_sig_in_empty_password(app):
-    app.login_page(username="bxuser", password="")
+    app.session.login(username="bxuser", password="")
 
 
 
